@@ -39,12 +39,12 @@
   <main>
     <form id="form" autocomplete="off">
       <section>
-        <h2>Dados do Responsável</h2>
-        <label for="nome">Nome</label>
+        <h2>Dados da Vistoria</h2>
+        <label for="nome">Nome do Locador</label>
         <input id="nome" type="text" required/>
-        <label for="email">E-mail do Vistoriador</label>
+        <label for="email">E-mail do Locador</label>
         <input id="email" type="email" required/>
-        <label for="email-locador">E-mail do Locador</label>
+        <label for="email-locador">E-mail do Vistoriador</label>
         <input id="email-locador" type="email" required/>
         <label for="obra">Obra / Projeto</label>
         <input id="obra" type="text" required/>
@@ -215,14 +215,17 @@
 
       // Assinaturas na capa
       const sigY = obsY + 90;
-      doc.setFont('helvetica','normal');
-      doc.setTextColor(0);
-      doc.text('Assinatura do Locatário', m, sigY);
-      doc.text('Assinatura do Locador', w-m, sigY, { align:'right' });
-      doc.text('Assinatura do Vistoriador', w/2, sigY+60, { align:'center' });
-      doc.line(m, sigY+10, m+200, sigY+10);
-      doc.line(w-m-200, sigY+10, w-m, sigY+10);
-      doc.line(w/2-100, sigY+70, w/2+100, sigY+70);
+      doc.setDrawColor(214, 0, 0);
+      doc.setLineWidth(1.2);
+
+      // locatário
+      doc.line(m, sigY + 10, m + 200, sigY + 10);
+
+      // locador
+      doc.line(w - m - 200, sigY + 10, w - m, sigY + 10);
+
+      // vistoriador (embaixo, 60pt abaixo)
+      doc.line(w / 2 - 100, sigY + 70, w / 2 + 100, sigY + 70);
 
       // Páginas de fotos
       for (const com of data.comodos) {
