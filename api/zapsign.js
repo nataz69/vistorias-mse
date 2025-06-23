@@ -39,10 +39,11 @@ module.exports = async (req, res) => {
 
     return res.json({ success: true, envelope: envelope.data });
   } catch (err) {
-    console.error('[API] ERRO interno:', err.response?.data || err.message);
-    return res.status(500).json({
-      success: false,
-      error: err.response?.data || err.message
+    console.error('[API] ERRO interno, response.data =', err.response?.data);
+    console.error('[API] ERRO interno, stack =', err.stack || err.message);
+    return res
+      .status(500)
+      .json({ success: false, error: err.response?.data || err.message });
     });
   }
 };
