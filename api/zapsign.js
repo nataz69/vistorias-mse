@@ -14,8 +14,8 @@ module.exports = async (req, res) => {
     const base64 = pdfDataUrl.split(',')[1];
     console.log('[API] Tamanho do PDF em base64:', base64?.length);
 
-    const DOCUMENTS_URL  = 'https://api.zapsign.com.br/v2/documents';
-    const SIGNATURES_URL = 'https://api.zapsign.com.br/v2/signatures';
+    const DOCUMENTS_URL  = 'https://sandbox.api.zapsign.com.br/api/v1/documents';
+    const SIGNATURES_URL = 'https://sandbox.api.zapsign.com.br/api/v1/signatures';
 
     console.log('[API] Fazendo upload do PDF para:', DOCUMENTS_URL);
     const upload = await axios.post(
