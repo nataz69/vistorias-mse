@@ -6,36 +6,36 @@
   <title>Envio de Vistorias – MSE Engenharia</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: #333; }
-    header { background: #d60000; padding: 16px; text-align: center; }
-    main { max-width: 900px; margin: 24px auto; background: #fff; border-radius: 8px; overflow: hidden; }
-    section { padding: 24px; border-bottom: 1px solid #eee; }
-    section:last-child { border-bottom: none; }
-    h2 { font-size: 1.25rem; color: #555; margin-bottom: 16px; }
-    label { display: block; margin-top: 12px; font-weight: 600; text-transform: uppercase; color: #555; }
-    input, select, textarea { width: 100%; padding: 8px; margin-top: 6px; border: 1px solid #ccc; border-radius: 6px; }
-    textarea { resize: vertical; min-height: 80px; }
-    .comodos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
-    .comodo { background: #fafafa; padding: 16px; border: 1px solid #ddd; border-radius: 6px; }
-    .comodo h3 { font-size: 1rem; text-align: center; color: #444; text-transform: uppercase; margin-bottom: 8px; }
-    .image-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .thumb { position: relative; width: 70px; height: 70px; border-radius: 4px; overflow: hidden; border: 1px solid #ccc; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .thumb button { position: absolute; top: 2px; right: 2px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; color: #d60000; cursor: pointer; }
-    button[type="submit"] { display: block; margin: 24px auto; padding: 12px 24px; background: #d60000; color: #fff; border: none; border-radius: 6px; text-transform: uppercase; font-weight: 600; cursor: pointer; }
-    button[type="submit"]:hover { background: #a90000; }
-    #loading { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
-    #loading.active { display: flex; }
-    #loading span { background: #fff; padding: 16px 24px; border-radius: 6px; font-size: 1rem; }
-    footer { text-align: center; padding: 16px; color: #777; font-size: .875rem; }
-    @media(max-width:600px){ main { margin: 16px; } }
+    * { box-sizing:border-box; margin:0; padding:0 }
+    body { font-family:'Inter',sans-serif; background:#f0f2f5; color:#333 }
+    header { background:#d60000; padding:16px; text-align:center }
+    main { max-width:900px; margin:24px auto; background:#fff; border-radius:8px; overflow:hidden }
+    section { padding:24px; border-bottom:1px solid #eee }
+    section:last-child { border-bottom:none }
+    h2 { font-size:1.25rem; color:#555; margin-bottom:16px }
+    label { display:block; margin-top:12px; font-weight:600; text-transform:uppercase; color:#555 }
+    input,select,textarea { width:100%; padding:8px; margin-top:6px; border:1px solid #ccc; border-radius:6px }
+    textarea { resize:vertical; min-height:80px }
+    .comodos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px }
+    .comodo { background:#fafafa; padding:16px; border:1px solid #ddd; border-radius:6px }
+    .comodo h3 { font-size:1rem; text-align:center; color:#444; text-transform:uppercase; margin-bottom:8px }
+    .image-preview { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
+    .thumb { position:relative; width:70px; height:70px; border-radius:4px; overflow:hidden; border:1px solid #ccc }
+    .thumb img { width:100%; height:100%; object-fit:cover }
+    .thumb button { position:absolute; top:2px; right:2px; background:rgba(255,255,255,0.8); border:none; border-radius:50%; width:20px; height:20px; font-size:14px; color:#d60000; cursor:pointer }
+    button[type="submit"] { display:block; margin:24px auto; padding:12px 24px; background:#d60000; color:#fff; border:none; border-radius:6px; text-transform:uppercase; font-weight:600; cursor:pointer }
+    button[type="submit"]:hover { background:#a90000 }
+    #loading { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:100 }
+    #loading.active { display:flex }
+    #loading span { background:#fff; padding:16px 24px; border-radius:6px; font-size:1rem }
+    footer { text-align:center; padding:16px; color:#777; font-size:.875rem }
+    @media(max-width:600px){ main{margin:16px} }
   </style>
 </head>
 <body>
-  <!-- cabeçalho com logo -->
+
   <header>
-    <img src="logo.png" alt="MSE Engenharia" style="height:50px;" />
+    <img src="logo.png" alt="MSE Engenharia" style="height:50px" />
   </header>
 
   <div id="loading"><span>Processando...</span></div>
@@ -60,7 +60,7 @@
         <input id="cidade" type="text" required />
 
         <div style="display:flex; gap:8px;">
-          <div style="flex:1;">
+          <div style="flex:1">
             <label for="dia">Dia</label>
             <select id="dia" required>
               <option value="">Dia</option>
@@ -74,7 +74,7 @@
               <option>29</option><option>30</option><option>31</option>
             </select>
           </div>
-          <div style="flex:2;">
+          <div style="flex:2">
             <label for="mes">Mês</label>
             <select id="mes" required>
               <option value="">Mês</option>
@@ -92,7 +92,7 @@
               <option value="dezembro">Dezembro</option>
             </select>
           </div>
-          <div style="flex:1;">
+          <div style="flex:1">
             <label for="ano">Ano</label>
             <select id="ano" required>
               <option value="">Ano</option>
@@ -174,15 +174,15 @@
 
     function renderPreview(name, container) {
       container.innerHTML = '';
-      fotosPorComodo[name].forEach((file, i) => {
+      fotosPorComodo[name].forEach((file,i) => {
         const thumb = document.createElement('div');
         thumb.className = 'thumb';
         const img = document.createElement('img');
         img.src = URL.createObjectURL(file);
         const btn = document.createElement('button');
         btn.textContent = '×';
-        btn.onclick = () => { fotosPorComodo[name].splice(i,1); renderPreview(name, container); };
-        thumb.append(img, btn);
+        btn.onclick = () => { fotosPorComodo[name].splice(i,1); renderPreview(name,container) };
+        thumb.append(img,btn);
         container.appendChild(thumb);
       });
     }
@@ -203,12 +203,11 @@
           obsGerais: document.getElementById('obs-gerais').value,
           comodos: []
         };
-
         for (const name of comodos) {
           const imgs = await Promise.all(
-            fotosPorComodo[name].map(f => new Promise(r => {
-              const fr = new FileReader();
-              fr.onload = ev => r(ev.target.result);
+            fotosPorComodo[name].map(f => new Promise(r=>{
+              const fr=new FileReader();
+              fr.onload=ev=>r(ev.target.result);
               fr.readAsDataURL(f);
             }))
           );
@@ -227,7 +226,7 @@
         alert('Envelope enviado para assinatura!');
       } catch (err) {
         console.error(err);
-        alert('Erro ao enviar: ' + err.message);
+        alert('Erro ao enviar: '+err.message);
       } finally {
         overlay.classList.remove('active');
       }
@@ -236,9 +235,9 @@
     async function generateAndSend(data, signers) {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ unit:'pt', format:'a4' });
-      const w = doc.internal.pageSize.getWidth();
-      const h = doc.internal.pageSize.getHeight();
-      const m = 40;
+      const w = doc.internal.pageSize.getWidth(),
+            h = doc.internal.pageSize.getHeight(),
+            m = 40;
       let y = m;
 
       // Título
@@ -265,48 +264,50 @@
       doc.setFillColor('#f7f7f7').rect(m, obsY, w-2*m, 60, 'F');
       doc.setDrawColor(214,0,0).rect(m, obsY, w-2*m, 20);
       doc.setFont('helvetica','bold').setFontSize(14).text('Observações Gerais', m+10, obsY+14);
-      doc.setFont('helvetica','normal').setFontSize(12)
-         .text(data.obsGerais || '-', m+10, obsY+35, { maxWidth: w-2*m-20 });
+      doc.setFont('helvetica','normal').setFontSize(12).text(data.obsGerais||'-', m+10, obsY+35, { maxWidth: w-2*m-20 });
 
-      // Assinaturas
+      // Assinaturas (primeira linha 120px abaixo das observações)
       const lineW = 250;
       doc.setDrawColor(214,0,0).setLineWidth(1.2);
-      const firstY  = obsY + 80, secondY = firstY + 80, thirdY  = secondY + 80;
+      const firstY  = obsY + 120;
+      const secondY = firstY + 80;
+      const thirdY  = secondY + 80;
+
       doc.line(w/2-lineW/2, firstY,  w/2+lineW/2, firstY);
       doc.text('VISTORIADOR - MSE ENGENHARIA', w/2, firstY+15, { align:'center' });
+
       doc.line(w/2-lineW/2, secondY, w/2+lineW/2, secondY);
       doc.text('LOCATÁRIO', w/2, secondY+15, { align:'center' });
+
       doc.line(w/2-lineW/2, thirdY,  w/2+lineW/2, thirdY);
       doc.text('LOCADOR', w/2, thirdY+15, { align:'center' });
 
       // Data no rodapé
       const dateText = `${data.cidade}, ${data.dia} de ${data.mes} de ${data.ano}`;
       doc.setFont('helvetica','normal').setFontSize(12).setTextColor(100);
-      doc.text(dateText, w - m, h - 40, { align:'right' });
+      doc.text(dateText, w-m, h-40, { align:'right' });
 
-      // Fotos
+      // Páginas de fotos
       for (const com of data.comodos) {
         for (const img of com.imgs) {
           doc.addPage();
           doc.setFont('helvetica','bold').setFontSize(16).setTextColor(214,0,0)
              .text(com.name.toUpperCase(), w/2, m, { align:'center' });
           if (com.obs) {
-            doc.setFont('helvetica','normal').setFontSize(12).setTextColor(0)
-               .text(com.obs, w/2, m+20, { align:'center', maxWidth: w-2*m });
+            doc.setFont('helvetica','normal').setFontSize(12).text(com.obs, w/2, m+20, { align:'center', maxWidth: w-2*m });
           }
           const props = doc.getImageProperties(img),
                 iw = w-2*m,
-                ih = (props.height * iw) / props.width,
-                type = img.includes('png') ? 'PNG' : 'JPEG';
+                ih = (props.height*iw)/props.width,
+                type = img.includes('png')?'PNG':'JPEG';
           doc.addImage(img, type, m, m+40, iw, ih);
         }
       }
 
-      // Envia
       const pdfDataUrl = doc.output('dataurlstring');
       await fetch('/api/zapsign', {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json' },
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
         body: JSON.stringify({ pdfDataUrl, signers })
       });
     }
