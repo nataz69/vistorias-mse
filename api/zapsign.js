@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   try {
     const { pdfDataUrl, signers } = req.body;
     console.log('[API] Número de signers:', Array.isArray(signers) ? signers.length : 'inválido');
-    
+
     const base64 = pdfDataUrl.split(',')[1];
     console.log('[API] Tamanho do PDF em base64:', base64?.length);
 
@@ -44,6 +44,5 @@ module.exports = async (req, res) => {
     return res
       .status(500)
       .json({ success: false, error: err.response?.data || err.message });
-    });
   }
 };
