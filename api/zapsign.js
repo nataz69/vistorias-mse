@@ -1,5 +1,8 @@
 const axios = require('axios');
 
+const API_BASE      = 'https://sandbox.api.zapsign.com.br/api/v1';
+const DOCUMENTS_URL = `${API_BASE}/docs/`;
+
 module.exports = async (req, res) => {
   console.log('[API] Recebido body:', JSON.stringify(req.body).slice(0,200));
   if (req.method !== 'POST') {
@@ -14,35 +17,29 @@ module.exports = async (req, res) => {
     const base64 = pdfDataUrl.split(',')[1];
     console.log('[API] Tamanho do PDF em base64:', base64?.length);
 
-    const DOCUMENTS_URL  = 'https://sandbox.api.zapsign.com.br/api/v1/documents';
-    const SIGNATURES_URL = 'https://sandbox.api.zapsign.com.br/api/v1/signatures';
-
-    console.log('[API] Fazendo upload do PDF para:', DOCUMENTS_URL);
-    const upload = await axios.post(
+    console.log('[API] Fazendo requisição para:', DOCUMENTS_URL);
+    const response = await axios.post(
       DOCUMENTS_URL,
-      { file_base_64: base64, file_extension: 'pdf' },
-      { headers: { Authorization: `Bearer ${process.env.ZAPSIGN_API_KEY}` } }
-    );
-    console.log('[API] Resposta do upload:', upload.data);
-
-    console.log('[API] Criando envelope em:', SIGNATURES_URL);
-    const envelope = await axios.post(
-      SIGNATURES_URL,
       {
-        document_id: upload.data.id,
-        signers,
-        send_email: true
+        name       : 'VISTORIA MSE',
+        base64_pdf : base64,
+        signers    : signers
       },
-      { headers: { Authorization: `Bearer ${process.env.ZAPSIGN_API_KEY}` } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.ZAPSIGN_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
     );
-    console.log('[API] Envelope criado:', envelope.data);
 
-    return res.json({ success: true, envelope: envelope.data });
+    console.log('[API] Documento criado:', response.data);
+    return res.json({ success: true, data: response.data });
   } catch (err) {
-    console.error('[API] ERRO interno, response.data =', err.response?.data);
-    console.error('[API] ERRO interno, stack =', err.stack || err.message);
-    return res
-      .status(500)
-      .json({ success: false, error: err.response?.data || err.message });
+    console.error('[API] ERRO interno:', err.response?.data || err.message);
+    return res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message
+    });
   }
 };
