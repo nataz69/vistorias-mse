@@ -12,9 +12,8 @@ export default async function handler(req, res) {
       'https://api.zapsign.com.br/v2/documents',
       { file_base_64: base64, file_extension: 'pdf' },
       {
-        auth: {
-          username: process.env.ZAPSIGN_API_KEY,
-          password: process.env.ZAPSIGN_API_SECRET
+        headers: {
+          Authorization: `Bearer ${process.env.ZAPSIGN_API_KEY}`
         }
       }
     );
@@ -28,16 +27,15 @@ export default async function handler(req, res) {
         send_email: true
       },
       {
-        auth: {
-          username: process.env.ZAPSIGN_API_KEY,
-          password: process.env.ZAPSIGN_API_SECRET
+        headers: {
+          Authorization: `Bearer ${process.env.ZAPSIGN_API_KEY}`
         }
       }
     );
 
     return res.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error(err.response?.data || err.message);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
