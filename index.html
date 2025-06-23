@@ -26,8 +26,8 @@
     .thumb button { position: absolute; top: 2px; right: 2px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; color: #d60000; cursor: pointer; }
     button[type="submit"] { display: block; margin: 24px auto; padding: 12px 24px; background: #d60000; color: #fff; border: none; border-radius: 6px; text-transform: uppercase; font-weight: 600; cursor: pointer; }
     button[type="submit"]:hover { background: #a90000; }
-    #loading { display: none !important; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
-    #loading.active { display: flex !important; }
+    #loading { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; }
+    #loading.active { display: flex; }
     #loading span { background: #fff; padding: 16px 24px; border-radius: 6px; font-size: 1rem; }
     footer { text-align: center; padding: 16px; color: #777; font-size: 0.875rem; }
     @media(max-width:600px){ main { margin:16px; } }
@@ -61,6 +61,7 @@
     </form>
   </main>
   <footer>© 2025 MSE Engenharia</footer>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     console.log('[DEBUG] Script carregado');
@@ -72,9 +73,12 @@
     ];
     const fotosPorComodo = {}, textareasPorComodo = {};
     const grid = document.getElementById('grid'), overlay = document.getElementById('loading');
+
+    // Monta grid de cômodos
     comodos.forEach(name => {
       fotosPorComodo[name] = [];
-      const div = document.createElement('div'); div.className = 'comodo';
+      const div = document.createElement('div');
+      div.className = 'comodo';
       div.innerHTML = `
         <h3>${name.toUpperCase()}</h3>
         <input type="file" accept="image/*" multiple/>
@@ -82,78 +86,182 @@
         <label>Observações</label>
         <textarea></textarea>
       `;
-      const input = div.querySelector('input'), preview = div.querySelector('.image-preview'), ta = div.querySelector('textarea');
+      const input = div.querySelector('input'),
+            preview = div.querySelector('.image-preview'),
+            ta = div.querySelector('textarea');
       textareasPorComodo[name] = ta;
+
       input.addEventListener('change', e => {
-        console.log(`[DEBUG] Arquivos adicionados ao cômodo ${name}`, e.target.files);
+        console.log('[DEBUG] Arquivos adicionados ao cômodo', name, e.target.files);
         Array.from(e.target.files).forEach(f => fotosPorComodo[name].push(f));
-        renderPreview(name,preview);
-        input.value='';
+        renderPreview(name, preview);
+        input.value = '';
       });
+
       grid.appendChild(div);
     });
-    function renderPreview(name,container) {
+
+    function renderPreview(name, container) {
       container.innerHTML = '';
-      fotosPorComodo[name].forEach((file,i)=>{
-        const thumb=document.createElement('div'); thumb.className='thumb';
-        const img=document.createElement('img'); img.src=URL.createObjectURL(file);
-        const btn=document.createElement('button'); btn.textContent='×'; btn.onclick=()=>{ fotosPorComodo[name].splice(i,1); renderPreview(name,container); };
-        thumb.append(img,btn); container.appendChild(thumb);
+      fotosPorComodo[name].forEach((file, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb';
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.onclick = () => { fotosPorComodo[name].splice(i,1); renderPreview(name, container); };
+        thumb.append(img, btn);
+        container.appendChild(thumb);
       });
     }
+
     document.getElementById('form').addEventListener('submit', async e => {
-      e.preventDefault(); overlay.classList.add('active');
+      e.preventDefault();
+      overlay.classList.add('active');
       console.log('[DEBUG] Formulário submetido');
-      const data={
-        nome:document.getElementById('nome').value,
-        email:document.getElementById('email').value,
-        obra:document.getElementById('obra').value,
-        local:document.getElementById('local').value,
-        obsGerais:document.getElementById('obs-gerais').value,
-        comodos:[]
-      };
-      console.log('[DEBUG] Dados coletados', data);
-      for(const name of comodos){
-        const imgs=await Promise.all(fotosPorComodo[name].map(f=>new Promise(res=>{const fr=new FileReader();fr.onload=ev=>res(ev.target.result);fr.readAsDataURL(f);})));        
-        const obs=textareasPorComodo[name].value;
-        data.comodos.push({name,imgs,obs});
+
+      try {
+        // Coleta dados
+        const data = {
+          nome: document.getElementById('nome').value,
+          email: document.getElementById('email').value,
+          emailLocador: document.getElementById('email-locador').value,
+          obra: document.getElementById('obra').value,
+          local: document.getElementById('local').value,
+          obsGerais: document.getElementById('obs-gerais').value,
+          comodos: []
+        };
+        console.log('[DEBUG] Dados coletados', data);
+
+        // Converte imagens para base64 e coleta observação
+        for (const name of comodos) {
+          const imgs = await Promise.all(
+            fotosPorComodo[name].map(f => new Promise(res => {
+              const fr = new FileReader();
+              fr.onload = ev => res(ev.target.result);
+              fr.readAsDataURL(f);
+            }))
+          );
+          const obs = textareasPorComodo[name].value;
+          data.comodos.push({ name, imgs, obs });
+        }
+        console.log('[DEBUG] Itens de cômodos preparados', data.comodos);
+
+        // Define signatários
+        const signers = [
+          { email: 'matheus.dias@mse.com.br', name: 'Matheus Dias', x:100, y:600, width:200, height:50, page:1 },
+          { email: data.email, name: data.nome, x:100, y:660, width:200, height:50, page:1 },
+          { email: data.emailLocador, name: 'Locador', x:100, y:720, width:200, height:50, page:1 }
+        ];
+        console.log('[DEBUG] Signatários definidos', signers);
+
+        // Gera e envia o PDF
+        const result = await generateAndSend(data, signers);
+        alert('Envelope enviado para assinatura!');
+        console.log('[DEBUG] Resultado final', result);
+
+      } catch (err) {
+        console.error('[ERROR] Falha ao enviar envelope', err);
+        alert('Erro ao enviar: ' + err.message);
+      } finally {
+        overlay.classList.remove('active');
       }
-      const signers=[
-        { email:'matheus.dias@mse.com.br', name:'Matheus Dias', x:100,y:600,width:200,height:50,page:1 },
-        { email:data.email, name:data.nome, x:100,y:660,width:200,height:50,page:1 },
-        { email:document.getElementById('email-locador').value, name:'Locador', x:100,y:720,width:200,height:50,page:1 }
-      ];
-      console.log('[DEBUG] Signatários definidos', signers);
-      try{ await generateAndSend(data,signers); alert('Envelope enviado para assinatura!'); }
-      catch(err){ console.error('[ERROR] Falha ao enviar envelope', err); alert('Erro: '+err.message);} 
-      finally{ overlay.classList.remove('active'); }
     });
-    async function generateAndSend(data,signers) {
+
+    async function generateAndSend(data, signers) {
       console.log('[DEBUG] Iniciando geração de PDF');
-      const{ jsPDF }=window.jspdf; const doc=new jsPDF({unit:'pt',format:'a4'});
-      doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.setTextColor(0);
-      const w=doc.internal.pageSize.getWidth(), m=40; let y=m;
-      doc.setFillColor(214,0,0); doc.rect(m,y+40,w-2*m,30,'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.setTextColor(255);
-      doc.text('FICHA DE VISTORIA', w/2, y+62, {align:'center'});
-      doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.setTextColor(0);
-      y+=100;
-      const boxY=y, lh=24; doc.setDrawColor(214,0,0); doc.setLineWidth(1.2); doc.rect(m,boxY,w-2*m,lh*4+10);
-      doc.text('Nome',m+10,boxY+lh); doc.text(data.nome,m+80,boxY+lh);
-      doc.text('E-mail',m+10,boxY+lh*2); doc.text(data.email,m+80,boxY+lh*2);
-      doc.text('Obra / Projeto',m+10,boxY+lh*3); doc.text(data.obra,m+110,boxY+lh*3);
-      doc.text('Local',m+10,boxY+lh*4); doc.text(data.local,m+80,boxY+lh*4);
-      const obsY=boxY+lh*4+30; doc.setFillColor('#f7f7f7'); doc.rect(m,obsY,w-2*m,60,'F'); doc.setDrawColor(214,0,0); doc.rect(m,obsY,w-2*m,20);
-      doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.setTextColor(0); doc.text('Observações Gerais',m+10,obsY+14);
-      doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.text(data.obsGerais||'-',m+10,obsY+35,{maxWidth:w-2*m-20});
-      const sigY=obsY+90; doc.text('Assinatura do Locatário',m,sigY); doc.text('Assinatura do Locador',w-m,sigY,{align:'right'}); doc.text('Assinatura do Vistoriador',w/2,sigY+60,{align:'center'});
-      doc.line(m,sigY+10,m+200,sigY+10); doc.line(w-m-200,sigY+10,w-m,sigY+10); doc.line(w/2-100,sigY+70,w/2+100,sigY+70);
-      for(const com of data.comodos){ for(const img of com.imgs){ doc.addPage(); doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(214,0,0); doc.text(com.name.toUpperCase(),w/2,m,{align:'center'}); if(com.obs){ doc.setFont('helvetica','normal'); doc.setFontSize(12); doc.text(com.obs,w/2,m+20,{align:'center',maxWidth:w-2*m}); } const p=doc.getImageProperties(img), iw=w-2*m, ih=p.height*iw/p.width; const mime=img.split(';')[0].split(':')[1], type=mime.includes('png')?'PNG':'JPEG'; doc.addImage(img,type,m,m+40,iw,ih); }}
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit:'pt', format:'a4' });
+      const w = doc.internal.pageSize.getWidth(), m = 40;
+      let y = m;
+
+      // Capa
+      doc.setFillColor(214,0,0);
+      doc.rect(m, y+40, w-2*m, 30, 'F');
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(20);
+      doc.setTextColor(255);
+      doc.text('FICHA DE VISTORIA', w/2, y+62, { align:'center' });
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(12);
+      doc.setTextColor(0);
+      y += 100;
+      const boxY = y, lh = 24;
+      doc.setDrawColor(214,0,0);
+      doc.setLineWidth(1.2);
+      doc.rect(m, boxY, w-2*m, lh*4+10);
+      doc.text('Nome', m+10, boxY+lh);
+      doc.text(data.nome, m+80, boxY+lh);
+      doc.text('E-mail', m+10, boxY+lh*2);
+      doc.text(data.email, m+80, boxY+lh*2);
+      doc.text('Obra / Projeto', m+10, boxY+lh*3);
+      doc.text(data.obra, m+110, boxY+lh*3);
+      doc.text('Local', m+10, boxY+lh*4);
+      doc.text(data.local, m+80, boxY+lh*4);
+
+      // Observações Gerais
+      const obsY = boxY + lh*4 + 30;
+      doc.setFillColor('#f7f7f7');
+      doc.rect(m, obsY, w-2*m, 60, 'F');
+      doc.setDrawColor(214,0,0);
+      doc.rect(m, obsY, w-2*m, 20);
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(14);
+      doc.text('Observações Gerais', m+10, obsY+14);
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(12);
+      doc.text(data.obsGerais || '-', m+10, obsY+35, { maxWidth: w-2*m-20 });
+
+      // Assinaturas na capa
+      const sigY = obsY + 90;
+      doc.setFont('helvetica','normal');
+      doc.setTextColor(0);
+      doc.text('Assinatura do Locatário', m, sigY);
+      doc.text('Assinatura do Locador', w-m, sigY, { align:'right' });
+      doc.text('Assinatura do Vistoriador', w/2, sigY+60, { align:'center' });
+      doc.line(m, sigY+10, m+200, sigY+10);
+      doc.line(w-m-200, sigY+10, w-m, sigY+10);
+      doc.line(w/2-100, sigY+70, w/2+100, sigY+70);
+
+      // Páginas de fotos
+      for (const com of data.comodos) {
+        for (const img of com.imgs) {
+          doc.addPage();
+          doc.setFont('helvetica','bold');
+          doc.setFontSize(16);
+          doc.setTextColor(214,0,0);
+          doc.text(com.name.toUpperCase(), w/2, m, { align:'center' });
+          if (com.obs) {
+            doc.setFont('helvetica','normal');
+            doc.setFontSize(12);
+            doc.setTextColor(0);
+            doc.text(com.obs, w/2, m+20, { align:'center', maxWidth: w-2*m });
+          }
+          const props = doc.getImageProperties(img);
+          const iw = w-2*m, ih = (props.height * iw) / props.width;
+          const mime = img.split(';')[0].split(':')[1];
+          const type = mime.includes('png') ? 'PNG' : 'JPEG';
+          doc.addImage(img, type, m, m+40, iw, ih);
+        }
+      }
+
+      // Transforma em dataURL e envia
       const pdfDataUrl = doc.output('dataurlstring');
-      console.log('[DEBUG] Enviando PDF para API, tamanho base64:', pdfDataUrl.length);
-      const response = await fetch('/api/zapsign', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ pdfDataUrl, signers }) });
+      console.log('[DEBUG] PDF gerado, base64 length:', pdfDataUrl.length);
+
+      console.log('[DEBUG] Enviando PDF para /api/zapsign');
+      const response = await fetch('/api/zapsign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pdfDataUrl, signers })
+      });
+      console.log('[DEBUG] HTTP status:', response.status);
       const result = await response.json();
-      console.log('[DEBUG] Resposta da API', result);
+      console.log('[DEBUG] Resposta da API:', result);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      if (!result.success) throw new Error(result.error || 'Falha na API');
+      return result;
     }
   </script>
 </body>
