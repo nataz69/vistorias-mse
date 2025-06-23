@@ -1,6 +1,11 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
+  console.log('[API] ZAPSIGN_API_KEY existe?', !!process.env.ZAPSIGN_API_KEY);
+
+const axios = require('axios');
+
+module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end('Method not allowed');
 
   try {
