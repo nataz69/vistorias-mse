@@ -39,11 +39,13 @@
   <main>
     <form id="form" autocomplete="off">
       <section>
-        <h2>Dados da Vistoria</h2>
+        <h2>Dados do Responsável</h2>
         <label for="nome">Nome do Locador</label>
         <input id="nome" type="text" required/>
         <label for="email">E-mail do Locador</label>
         <input id="email" type="email" required/>
+        <label for="nome-vistoriador">Nome do Vistoriador (ADM)</label>
+        <input id="nome-vistoriador" type="text" required/>
         <label for="email-locador">E-mail do Vistoriador</label>
         <input id="email-locador" type="email" required/>
         <label for="obra">Obra / Projeto</label>
@@ -74,7 +76,6 @@
     const fotosPorComodo = {}, textareasPorComodo = {};
     const grid = document.getElementById('grid'), overlay = document.getElementById('loading');
 
-    // Monta grid de cômodos
     comodos.forEach(name => {
       fotosPorComodo[name] = [];
       const div = document.createElement('div');
@@ -92,7 +93,6 @@
       textareasPorComodo[name] = ta;
 
       input.addEventListener('change', e => {
-        console.log('[DEBUG] Arquivos adicionados ao cômodo', name, e.target.files);
         Array.from(e.target.files).forEach(f => fotosPorComodo[name].push(f));
         renderPreview(name, preview);
         input.value = '';
@@ -122,19 +122,17 @@
       console.log('[DEBUG] Formulário submetido');
 
       try {
-        // Coleta dados
+        // Coleta dados principais
         const data = {
           nome: document.getElementById('nome').value,
           email: document.getElementById('email').value,
-          emailLocador: document.getElementById('email-locador').value,
           obra: document.getElementById('obra').value,
           local: document.getElementById('local').value,
           obsGerais: document.getElementById('obs-gerais').value,
           comodos: []
         };
-        console.log('[DEBUG] Dados coletados', data);
 
-        // Converte imagens para base64 e coleta observação
+        // Converte imagens e observações de cada cômodo
         for (const name of comodos) {
           const imgs = await Promise.all(
             fotosPorComodo[name].map(f => new Promise(res => {
@@ -148,15 +146,32 @@
         }
         console.log('[DEBUG] Itens de cômodos preparados', data.comodos);
 
-        // Define signatários
+        // Prepara signatários
+        const nomeVist = document.getElementById('nome-vistoriador').value;
+        const emailVist = document.getElementById('email-locador').value;
         const signers = [
-          { email: 'matheus.dias@mse.com.br', name: 'Matheus Dias', x:100, y:600, width:200, height:50, page:1 },
-          { email: data.email, name: data.nome, x:100, y:660, width:200, height:50, page:1 },
-          { email: data.emailLocador, name: 'Locador', x:100, y:720, width:200, height:50, page:1 }
+          {
+            name: 'Matheus Dias',
+            email: 'matheus.dias@mse.com.br',
+            send_automatic_email: true,
+            x: 100, y: 600, width: 200, height: 50, page: 1
+          },
+          {
+            name: nomeVist,
+            email: emailVist,
+            send_automatic_email: true,
+            x: 100, y: 660, width: 200, height: 50, page: 1
+          },
+          {
+            name: data.nome,
+            email: data.email,
+            send_automatic_email: true,
+            x: 100, y: 720, width: 200, height: 50, page: 1
+          }
         ];
         console.log('[DEBUG] Signatários definidos', signers);
 
-        // Gera e envia o PDF
+        // Gera o PDF e envia
         const result = await generateAndSend(data, signers);
         alert('Envelope enviado para assinatura!');
         console.log('[DEBUG] Resultado final', result);
@@ -172,11 +187,11 @@
     async function generateAndSend(data, signers) {
       console.log('[DEBUG] Iniciando geração de PDF');
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit:'pt', format:'a4' });
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
       const w = doc.internal.pageSize.getWidth(), m = 40;
       let y = m;
 
-      // Capa
+      // --- Capa ---
       doc.setFillColor(214,0,0);
       doc.rect(m, y+40, w-2*m, 30, 'F');
       doc.setFont('helvetica','bold');
@@ -187,17 +202,19 @@
       doc.setFontSize(12);
       doc.setTextColor(0);
       y += 100;
+
+      // Dados do Locador
       const boxY = y, lh = 24;
       doc.setDrawColor(214,0,0);
       doc.setLineWidth(1.2);
       doc.rect(m, boxY, w-2*m, lh*4+10);
-      doc.text('Nome', m+10, boxY+lh);
+      doc.text('Nome:', m+10, boxY+lh);
       doc.text(data.nome, m+80, boxY+lh);
-      doc.text('E-mail', m+10, boxY+lh*2);
+      doc.text('E-mail:', m+10, boxY+lh*2);
       doc.text(data.email, m+80, boxY+lh*2);
-      doc.text('Obra / Projeto', m+10, boxY+lh*3);
+      doc.text('Obra / Projeto:', m+10, boxY+lh*3);
       doc.text(data.obra, m+110, boxY+lh*3);
-      doc.text('Local', m+10, boxY+lh*4);
+      doc.text('Local:', m+10, boxY+lh*4);
       doc.text(data.local, m+80, boxY+lh*4);
 
       // Observações Gerais
@@ -213,21 +230,15 @@
       doc.setFontSize(12);
       doc.text(data.obsGerais || '-', m+10, obsY+35, { maxWidth: w-2*m-20 });
 
-      // Assinaturas na capa
+      // Linhas de assinatura (sem texto)
       const sigY = obsY + 90;
       doc.setDrawColor(214, 0, 0);
       doc.setLineWidth(1.2);
+      doc.line(m,       sigY+10, m+200,       sigY+10); // locatário
+      doc.line(w-m-200, sigY+10, w-m,         sigY+10); // locador
+      doc.line(w/2-100, sigY+70, w/2+100,     sigY+70); // vistoriador
 
-      // locatário
-      doc.line(m, sigY + 10, m + 200, sigY + 10);
-
-      // locador
-      doc.line(w - m - 200, sigY + 10, w - m, sigY + 10);
-
-      // vistoriador (embaixo, 60pt abaixo)
-      doc.line(w / 2 - 100, sigY + 70, w / 2 + 100, sigY + 70);
-
-      // Páginas de fotos
+      // --- Páginas de Fotos ---
       for (const com of data.comodos) {
         for (const img of com.imgs) {
           doc.addPage();
@@ -249,7 +260,7 @@
         }
       }
 
-      // Transforma em dataURL e envia
+      // --- Envia para a API ---
       const pdfDataUrl = doc.output('dataurlstring');
       console.log('[DEBUG] PDF gerado, base64 length:', pdfDataUrl.length);
 
