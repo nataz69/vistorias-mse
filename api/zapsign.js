@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API_BASE      = 'https://sandbox.api.zapsign.com.br/api/v1';
+const API_BASE      = 'https://api.zapsign.com.br/api/v1/';
 const DOCUMENTS_URL = `${API_BASE}/docs/`;
 
 module.exports = async (req, res) => {
