@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const API_BASE      = 'https://api.zapsign.com.br/api/v1/';
-const DOCUMENTS_URL = `${API_BASE}/docs/`;
+const API_BASE      = 'https://api.zapsign.com.br/api/v1';  // sem barra no final!
+const DOCUMENTS_URL = `${API_BASE}/docs/`; // vai gerar /api/v1/docs/
 
 module.exports = async (req, res) => {
   console.log('[API] Recebido body:', JSON.stringify(req.body).slice(0,200));
