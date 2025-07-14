@@ -399,8 +399,13 @@
           margin: { left: 40, right: 40 }
         });
       }
-      doc.save("ficha-vistoria-mse.pdf");
-    }
+const pdfDataUrl = doc.output('dataurlstring');
+await fetch('/api/zapsign', {
+  method:'POST',
+  headers:{ 'Content-Type':'application/json' },
+  body: JSON.stringify({ pdfDataUrl /*, signers: signers */ })
+});
+alert('Envelope enviado para assinatura!');
   </script>
 </body>
 </html>
