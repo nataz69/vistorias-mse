@@ -6,30 +6,127 @@
   <title>Envio de Vistorias – MSE Engenharia</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing:border-box; margin:0; padding:0 }
-    body { font-family:'Inter',sans-serif; background:#f0f2f5; color:#333 }
-    header { background:#d60000; padding:16px; text-align:center }
-    main { max-width:900px; margin:24px auto; background:#fff; border-radius:8px; overflow:hidden }
-    section { padding:24px; border-bottom:1px solid #eee }
-    section:last-child { border-bottom:none }
-    h2 { font-size:1.25rem; color:#555; margin-bottom:16px }
-    label { display:block; margin-top:12px; font-weight:600; text-transform:uppercase; color:#555 }
-    input,select,textarea { width:100%; padding:8px; margin-top:6px; border:1px solid #ccc; border-radius:6px }
-    textarea { resize:vertical; min-height:80px }
-    .comodos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px }
-    .comodo { background:#fafafa; padding:16px; border:1px solid #ddd; border-radius:6px }
-    .comodo h3 { font-size:1rem; text-align:center; color:#444; text-transform:uppercase; margin-bottom:8px }
-    .image-preview { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
-    .thumb { position:relative; width:70px; height:70px; border-radius:4px; overflow:hidden; border:1px solid #ccc }
-    .thumb img { width:100%; height:100%; object-fit:cover }
-    .thumb button { position:absolute; top:2px; right:2px; background:rgba(255,255,255,0.8); border:none; border-radius:50%; width:20px; height:20px; font-size:14px; color:#d60000; cursor:pointer }
-    button[type="submit"] { display:block; margin:24px auto; padding:12px 24px; background:#d60000; color:#fff; border:none; border-radius:6px; text-transform:uppercase; font-weight:600; cursor:pointer }
-    button[type="submit"]:hover { background:#a90000 }
-    #loading { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:100 }
-    #loading.active { display:flex }
-    #loading span { background:#fff; padding:16px 24px; border-radius:6px; font-size:1rem }
-    footer { text-align:center; padding:16px; color:#777; font-size:.875rem }
-    @media(max-width:600px){ main{margin:16px} }
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: #333 }
+    header { background: #d60000; padding: 16px; text-align: center }
+    main {
+      max-width: 900px;
+      margin: 32px auto 24px auto;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      padding-bottom: 24px;
+    }
+    section { padding: 24px; border-bottom: 1px solid #eee }
+    section:last-child { border-bottom: none }
+    h2 { font-size: 1.35rem; color: #555; margin-bottom: 16px }
+    label { display: block; margin-top: 12px; font-weight: 600; text-transform: uppercase; color: #555 }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 1rem;
+    }
+    textarea { resize: vertical; min-height: 80px }
+    .comodos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 0;
+    }
+    .comodo {
+      background: #fff;
+      padding: 20px 18px 18px 18px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      max-width: 600px;
+      margin: 0 auto 8px auto;
+      transition: box-shadow 0.2s;
+    }
+    .comodo h3 {
+      font-size: 1.07rem;
+      text-align: center;
+      color: #c20000;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .image-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px }
+    .thumb { position: relative; width: 70px; height: 70px; border-radius: 4px; overflow: hidden; border: 1px solid #ccc }
+    .thumb img { width: 100%; height: 100%; object-fit: cover }
+    .thumb button {
+      position: absolute;
+      top: 2px; right: 2px;
+      background: rgba(255,255,255,0.8);
+      border: none; border-radius: 50%;
+      width: 20px; height: 20px;
+      font-size: 14px; color: #d60000; cursor: pointer;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.13);
+    }
+    button[type="submit"] {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 14px 36px;
+      background: #d60000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 1.13rem;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 9px rgba(214,0,0,0.12);
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    button[type="submit"]:hover {
+      background: #a90000;
+      box-shadow: 0 7px 18px rgba(214,0,0,0.15);
+    }
+    #loading {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.18);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    #loading.active { display: flex }
+    #loading span {
+      background: #fff;
+      padding: 18px 36px;
+      border-radius: 12px;
+      font-size: 1.13rem;
+      font-weight: 600;
+      color: #d60000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      letter-spacing: .5px;
+    }
+    footer {
+      text-align: center;
+      padding: 22px 0 10px 0;
+      color: #777;
+      font-size: .95rem;
+      background: transparent;
+      width: 100vw;
+      position: relative;
+      left: 0;
+    }
+    @media(max-width:700px){
+      main{margin:14px}
+      .comodo{max-width:100%;}
+    }
+    @media(max-width:480px){
+      section { padding: 14px }
+      .comodo{padding:11px}
+      h2{font-size:1.1rem}
+    }
   </style>
 </head>
 <body>
@@ -136,9 +233,193 @@
   </main>
 
   <footer>© 2025 MSE Engenharia</footer>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    // Mapeamento de itens de avaliação por cômodo
+    const ITENS_COMODO = {
+      'Porta de Entrada': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portões, Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Sala de Estar': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Cozinha': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Pia, Torneiras, Sifão',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quintal': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portões, Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Lavanderia': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Tanque, Torneiras, Sifão, Ralos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Garagem': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portões, Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quarto 1': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quarto 2': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quarto 3': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quarto 4': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Quarto 5': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Suíte 1': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Suíte 2': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Suíte 3': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Suíte 4': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'Suíte 5': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Vidros e Espelhos',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'WC Social 1': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Pia, Torneiras, Sifão',
+        'Vidros, Espelhos e Acessórios (porta toalhas, etc)',
+        'Vaso Sanitário, Válvula Descarga',
+        'Box, Chuveiro, Ralo',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'WC Social 2': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Pia, Torneiras, Sifão',
+        'Vidros, Espelhos e Acessórios (porta toalhas, etc)',
+        'Vaso Sanitário, Válvula Descarga',
+        'Box, Chuveiro, Ralo',
+        'Possui mobília e/ou acessórios?'
+      ],
+      'WC Social 3': [
+        'Paredes/Revestimento/Pintura',
+        'Pisos e Rodapés',
+        'Teto',
+        'Portas e Janelas',
+        'Luminárias, tomadas e interruptores',
+        'Pia, Torneiras, Sifão',
+        'Vidros, Espelhos e Acessórios (porta toalhas, etc)',
+        'Vaso Sanitário, Válvula Descarga',
+        'Box, Chuveiro, Ralo',
+        'Possui mobília e/ou acessórios?'
+      ]
+    };
+
     const comodos = [
       'Porta de Entrada','Sala de Estar','Cozinha','Quintal','Lavanderia','Garagem',
       'Quarto 1','Quarto 2','Quarto 3','Quarto 4','Quarto 5',
@@ -153,13 +434,45 @@
       fotosPorComodo[name] = [];
       const div = document.createElement('div');
       div.className = 'comodo';
-      div.innerHTML = `
+      let html = `
         <h3>${name.toUpperCase()}</h3>
         <input type="file" accept="image/*" multiple/>
         <div class="image-preview"></div>
-        <label>Observações</label>
-        <textarea></textarea>
+        <div class="avaliacoes">
       `;
+      const itens = ITENS_COMODO[name] || [];
+      itens.forEach(item => {
+        if (item.toLowerCase().includes("mobília") || item.toLowerCase().includes("acessório")) {
+          html += `
+            <label>${item}
+              <select name="${item}">
+                <option value="">Selecione</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
+            </label>
+          `;
+        } else {
+          html += `
+            <label>${item}
+              <select name="${item}">
+                <option value="">Selecione</option>
+                <option value="Novo">Novo/Nunca usado</option>
+                <option value="Bom">Bom</option>
+                <option value="Regular">Regular</option>
+                <option value="Ruim">Ruim</option>
+                <option value="Não Aplicável">Não Aplicável</option>
+              </select>
+            </label>
+          `;
+        }
+      });
+      html += `
+          <label>Comentários:</label>
+          <textarea></textarea>
+        </div>
+      `;
+      div.innerHTML = html;
       const input = div.querySelector('input'),
             preview = div.querySelector('.image-preview'),
             ta = div.querySelector('textarea');
@@ -170,6 +483,8 @@
         input.value = '';
       });
       grid.appendChild(div);
+      if (!window.comodoDivs) window.comodoDivs = {};
+      window.comodoDivs[name] = div;
     });
 
     function renderPreview(name, container) {
@@ -204,6 +519,13 @@
           comodos: []
         };
         for (const name of comodos) {
+          const div = window.comodoDivs[name];
+          const selects = div.querySelectorAll('select');
+          const avaliacao = {};
+          selects.forEach(sel => {
+            avaliacao[sel.name] = sel.value;
+          });
+          const comentario = div.querySelector('textarea') ? div.querySelector('textarea').value : "";
           const imgs = await Promise.all(
             fotosPorComodo[name].map(f => new Promise(r=>{
               const fr=new FileReader();
@@ -211,7 +533,7 @@
               fr.readAsDataURL(f);
             }))
           );
-          data.comodos.push({ name, imgs, obs: textareasPorComodo[name].value });
+          data.comodos.push({ name, imgs, avaliacao, comentario });
         }
 
         const nomeVist  = document.getElementById('nome-vistoriador').value;
@@ -302,6 +624,27 @@
                 type = img.includes('png')?'PNG':'JPEG';
           doc.addImage(img, type, m, m+40, iw, ih);
         }
+        // Página da ficha de avaliação
+        doc.addPage();
+        doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(214,0,0);
+        doc.text(`Ficha de Avaliação – ${com.name}`, doc.internal.pageSize.getWidth() / 2, 40, { align: 'center' });
+
+        const head = [['Item', 'Estado de Conservação', 'Comentários']];
+        const itens = ITENS_COMODO[com.name] || [];
+        const body = itens.map(item => [
+          item,
+          com.avaliacao[item] || '',
+          com.comentario || ''
+        ]);
+
+        doc.autoTable({
+          head,
+          body,
+          startY: 60,
+          theme: 'grid',
+          styles: { fontSize: 11, cellPadding: 6 },
+          margin: { left: 40, right: 40 }
+        });
       }
 
       const pdfDataUrl = doc.output('dataurlstring');
