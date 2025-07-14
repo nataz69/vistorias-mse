@@ -399,11 +399,27 @@
           margin: { left: 40, right: 40 }
         });
       }
-    const pdfDataUrl = doc.output('dataurlstring');
+const pdfDataUrl = doc.output('dataurlstring');
+
+// Pegue os dados dos campos:
+const nomeVistoriador = document.getElementById('nome-vistoriador').value;
+const emailVistoriador = document.getElementById('email-locador').value;
+const nomeLocador = document.getElementById('nome').value;
+const emailLocador = document.getElementById('email').value;
+const nomeMatheus = 'Matheus Dias';
+const emailMatheus = 'matheus.dias@mse.com.br';
+
+// Monte o array de signers:
+const signers = [
+  { name: nomeMatheus, email: emailMatheus, send_automatic_email:true, x:100, y:600, width:200, height:50, page:1 },
+  { name: nomeVistoriador, email: emailVistoriador, send_automatic_email:true, x:100, y:660, width:200, height:50, page:1 },
+  { name: nomeLocador, email: emailLocador, send_automatic_email:true, x:100, y:720, width:200, height:50, page:1 }
+];
+
 await fetch('/api/zapsign', {
   method:'POST',
   headers:{ 'Content-Type':'application/json' },
-  body: JSON.stringify({ pdfDataUrl /*, signers: signers */ })
+  body: JSON.stringify({ pdfDataUrl, signers })
 });
 alert('Envelope enviado para assinatura!');
     }
