@@ -200,7 +200,7 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.textContent = '×';
-
+        btn.onclick = () => { 
           thumb.style.transform = "scale(0.8)";
           thumb.style.opacity = "0";
           setTimeout(()=>{fotosPorComodo[name].splice(i,1); renderPreview(name,container)},170);
