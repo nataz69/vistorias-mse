@@ -19,52 +19,24 @@
     .comodos-grid { display: flex; flex-direction: column; gap: 28px; }
     .comodo { background: #fafafa; padding: 18px 18px 28px 18px; border: 1.6px solid #eee; border-radius: 8px; box-shadow: 0 2px 10px #d6000016; margin-bottom: 18px; }
     .comodo h3 {
-      font-size: 1.14rem; margin-bottom: 0;
-      background: #d60000; color: #fff;
-      padding: 9px 0 9px 12px;
-      border-radius: 6px 6px 0 0;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 1.14rem; margin-bottom: 0; background: #d60000; color: #fff;
+      padding: 9px 0 9px 12px; border-radius: 6px 6px 0 0; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;
     }
-    .item-avaliacao-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1.3fr 0.7fr;
-      gap: 8px; align-items: center;
-      margin-bottom: 2px;
-    }
-    .item-avaliacao-header {
-      font-weight: 700; background: #f1f1f1; color: #d60000;
-      padding: 6px 0 6px 8px; border-radius: 5px;
-      text-align: left;
-      font-size: 1rem;
-    }
-    .avaria-preview, .fotos-preview {
-      display: flex; flex-wrap: wrap; gap: 9px; margin: 8px 0 0 0;
-    }
+    .item-avaliacao-grid { display: grid; grid-template-columns: 1.3fr 1fr 1.3fr 0.7fr; gap: 8px; align-items: center; margin-bottom: 2px; }
+    .item-avaliacao-header { font-weight: 700; background: #f1f1f1; color: #d60000; padding: 6px 0 6px 8px; border-radius: 5px; text-align: left; font-size: 1rem; }
+    .avaria-preview, .fotos-preview { display: flex; flex-wrap: wrap; gap: 9px; margin: 8px 0 0 0; }
     .avaria-thumb, .foto-thumb {
       position: relative; width: 67px; height: 67px; border: 1.5px solid #d60000; border-radius: 7px; overflow: hidden; background: #fff;
-      box-shadow: 0 2px 10px #d6000016;
-      display: flex; align-items: center; justify-content: center;
-      transition: box-shadow .18s;
+      box-shadow: 0 2px 10px #d6000016; display: flex; align-items: center; justify-content: center; transition: box-shadow .18s;
     }
     .avaria-thumb img, .foto-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .13s; }
     .avaria-thumb:hover img, .foto-thumb:hover img { transform: scale(1.07) rotate(-3deg); }
     .thumb-remove, .foto-thumb-remove {
-      position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
-      background: #fff; border-radius: 50%; border: 1.7px solid #d60000;
-      color: #d60000; font-weight: 900; font-size: 1.17rem; line-height: 20px;
-      text-align: center; cursor: pointer; transition: .15s;
-      box-shadow: 0 2px 8px #d6000020;
+      position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; background: #fff; border-radius: 50%; border: 1.7px solid #d60000;
+      color: #d60000; font-weight: 900; font-size: 1.17rem; line-height: 20px; text-align: center; cursor: pointer; transition: .15s; box-shadow: 0 2px 8px #d6000020;
     }
     .thumb-remove:hover, .foto-thumb-remove:hover { background: #d60000; color: #fff; }
-    .foto-btn, .file-btn {
-      background: #d60000; color: #fff; font-weight: 700;
-      border: none; border-radius: 7px; padding: 10px 20px;
-      font-size: 1.14rem; margin-top: 6px; cursor: pointer;
-      transition: background .16s, box-shadow .16s;
-      box-shadow: 0 2px 12px #d6000011; display: inline-block;
-    }
+    .foto-btn, .file-btn { background: #d60000; color: #fff; font-weight: 700; border: none; border-radius: 7px; padding: 10px 20px; font-size: 1.14rem; margin-top: 6px; cursor: pointer; transition: background .16s, box-shadow .16s; box-shadow: 0 2px 12px #d6000011; display: inline-block; }
     .foto-btn:hover, .file-btn:hover { background: #b30000; }
     .file-btn input[type="file"] { display: none; }
     .foto-label { color: #d60000; font-weight: 600; margin-top: 11px; }
@@ -77,12 +49,7 @@
     .movel-foto-btn { flex: 1 1 130px; }
     .movel-fotos-preview { flex: 1 1 125px; display: flex; gap: 7px;}
     .movel-remover { margin-left: 12px; }
-    .movel-add-btn {
-      margin-top: 8px; margin-bottom: 0;
-      background: #d60000; color: #fff; border: none; border-radius: 7px;
-      font-weight: 700; font-size: 1.1rem; padding: 10px 28px; cursor: pointer;
-      transition: background .14s; box-shadow: 0 2px 10px #d6000011;
-    }
+    .movel-add-btn { margin-top: 8px; margin-bottom: 0; background: #d60000; color: #fff; border: none; border-radius: 7px; font-weight: 700; font-size: 1.1rem; padding: 10px 28px; cursor: pointer; transition: background .14s; box-shadow: 0 2px 10px #d6000011; }
     .movel-add-btn:hover { background: #b30000; }
     select { appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill="gray" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5.516 7.548c-.316-.32-.838-.325-1.154-.005a.794.794 0 000 1.12l4.365 4.417c.31.314.826.314 1.135 0l4.367-4.417a.794.794 0 000-1.12c-.316-.32-.838-.325-1.154-.005L10 10.324 5.516 7.548z"/></svg>') right 10px center/16px 16px no-repeat; }
     @media (max-width: 750px){
@@ -95,16 +62,9 @@
     }
 
     /* Overlay de carregamento */
-    #loading-overlay{
-      display:none; position:fixed; inset:0; background:rgba(255,255,255,.9);
-      justify-content:center; align-items:center; z-index:9999;
-    }
+    #loading-overlay{ display:none; position:fixed; inset:0; background:rgba(255,255,255,.9); justify-content:center; align-items:center; z-index:9999; }
     @keyframes spin { to { transform: rotate(360deg) } }
-    .spinner{
-      width:56px;height:56px;border-radius:50%;
-      border:6px solid #d60000;border-right-color:transparent;
-      animation:spin .9s linear infinite;margin:0 auto 10px;
-    }
+    .spinner{ width:56px;height:56px;border-radius:50%; border:6px solid #d60000;border-right-color:transparent; animation:spin .9s linear infinite;margin:0 auto 10px; }
   </style>
 </head>
 <body>
@@ -197,7 +157,7 @@
   <div id="loading-overlay">
     <div style="text-align:center;">
       <div class="spinner"></div>
-      <strong style="color:#d60000">Gerando PDF...</strong>
+      <strong style="color:#d60000">Gerando e enviando para assinatura...</strong>
     </div>
   </div>
 
@@ -205,33 +165,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
 
   <script>
-    // ========== ITENS E CÔMODOS ==========
+    /* ===== CONFIG ===== */
+    const MATHEUS_EMAIL = 'matheus@SEU-DOMINIO.com.br'; // <<< TROCAR PELO E-MAIL CORRETO
+
+    /* ===== ITENS E CÔMODOS ===== */
     const ITENS_COMODO = {
-      'Porta de Entrada': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, Tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Sala de Estar': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, Tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Cozinha': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, Tomadas e Interruptores','Pia, Torneiras, Sifão','Possui mobília e/ou acessórios?'],
-      'Quintal': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, Tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Lavanderia': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, Tomadas e Interruptores','Tanque, Torneiras, Sifão, Ralos','Possui Mobília e/ou Acessórios?'],
-      'Garagem': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, Tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Quarto 1': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, Tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Quarto 2': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Quarto 3': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Quarto 4': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Quarto 5': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Vidros e Espelhos','Possui Mobília e/ou Acessórios?'],
-      'Suíte 1': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (Porta Toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'Suíte 2': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (Porta Toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'Suíte 3': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (Porta Toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'Suíte 4': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (Porta Toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'Suíte 5': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e Interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (Porta Toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'WC Social 1': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'WC Social 2': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
-      'WC Social 3': ['Paredes, Revestimento e Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui Mobília e/ou Acessórios?'],
+      'Porta de Entrada': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Sala de Estar': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Cozinha': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Possui mobília e/ou acessórios?'],
+      'Quintal': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Lavanderia': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Tanque, Torneiras, Sifão, Ralos','Possui mobília e/ou acessórios?'],
+      'Garagem': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portões, Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Quarto 1': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Quarto 2': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Quarto 3': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Quarto 4': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Quarto 5': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Vidros e Espelhos','Possui mobília e/ou acessórios?'],
+      'Suíte 1': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'Suíte 2': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'Suíte 3': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'Suíte 4': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'Suíte 5': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'WC Social 1': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'WC Social 2': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
+      'WC Social 3': ['Paredes/Revestimento/Pintura','Pisos e Rodapés','Teto','Portas e Janelas','Luminárias, tomadas e interruptores','Pia, Torneiras, Sifão','Vidros, Espelhos e Acessórios (porta toalhas, etc)','Vaso Sanitário, Válvula Descarga','Box, Chuveiro, Ralo','Possui mobília e/ou acessórios?'],
     };
     const ESTADOS = ["Novo/Nunca usado","Bom","Regular","Ruim","Não Aplicável"];
     const SIM_NAO = ["Sim","Não"];
     const comodos = Object.keys(ITENS_COMODO);
 
-    // ====== DADOS DOS CÔMODOS ======
+    // ====== GRID DE CÔMODOS ======
     const grid = document.getElementById('grid');
     const dadosComodos = {};
     comodos.forEach(comodoNome => {
@@ -280,17 +243,14 @@
       grid.appendChild(div);
     });
 
-    // NOVA FUNÇÃO para abrir o input file de fotos gerais
     window.abrirFileComodo = (comodo) => {
       document.getElementById('file_geral_'+comodo.replace(/[^\w]/g,'_')).click();
     };
 
-    // Conversão/compressão universal para JPEG (qualidade 0.9)
+    // Conversão/compressão universal p/ JPEG (qualidade 0.9)
     async function fileToJpegDataURL(file, maxSide=1600, quality=0.9) {
-      // tenta decodificar como ImageBitmap (funciona para heic no iOS moderno)
       const bitmap = await createImageBitmap(file).catch(() => null);
       if (!bitmap) {
-        // fallback: tenta ler como DataURL direto (pode falhar para HEIC antigo)
         return new Promise((res) => {
           const r = new FileReader();
           r.onload = () => res(r.result);
@@ -340,12 +300,8 @@
       input.value = "";
     };
     window.removerAvaria = (comodo, item, idx = null) => {
-      if (idx !== null) {
-        dadosComodos[comodo].avarias[item].splice(idx,1);
-      } else {
-        dadosComodos[comodo].avarias[item] = [];
-      }
-      window.renderAvaria
+      if (idx !== null) { dadosComodos[comodo].avarias[item].splice(idx,1); }
+      else { dadosComodos[comodo].avarias[item] = []; }
       window.renderAvariaPreview(comodo, item);
       const id = `${comodo}_${item}`.replace(/[^\w]/g, '_');
       document.getElementById('btn_rm_'+id).style.display =
@@ -367,7 +323,7 @@
       btnRm.style.display = avarias.length > 0 ? "inline-block" : "none";
     };
 
-    // Fotos gerais dos cômodos (com conversão p/ JPEG)
+    // Fotos gerais dos cômodos
     window.onFotoComodo = async (comodo, input) => {
       if (!dadosComodos[comodo].fotos) dadosComodos[comodo].fotos = [];
       for (const file of Array.from(input.files)) {
@@ -431,16 +387,11 @@
         bloco.appendChild(linha);
       });
     }
-    window.abrirFileMovel = (i) => {
-      document.getElementById('file_movel_'+i).click();
-    };
+    window.abrirFileMovel = (i) => { document.getElementById('file_movel_'+i).click(); };
     window.onEstadoMovel = (idx,sel) => {
       moveis[idx].estado = sel.value;
-      if (sel.value === "Regular" || sel.value === "Ruim") {
-        if (!moveis[idx].fotos) moveis[idx].fotos = [];
-      } else {
-        moveis[idx].fotos = [];
-      }
+      if (sel.value === "Regular" || sel.value === "Ruim") { if (!moveis[idx].fotos) moveis[idx].fotos = []; }
+      else { moveis[idx].fotos = []; }
       renderMoveis();
     };
     window.onFotoMovel = async (i,input) => {
@@ -452,21 +403,13 @@
       renderMoveis();
       input.value = '';
     };
-    window.removerFotoMovel = (i,idx) => {
-      moveis[i].fotos.splice(idx,1);
-      renderMoveis();
-    };
+    window.removerFotoMovel = (i,idx) => { moveis[i].fotos.splice(idx,1); renderMoveis(); };
     window.removerMovel = (idx) => { moveis.splice(idx,1); renderMoveis(); };
-    document.getElementById('btn-add-movel').onclick = () => {
-      moveis.push({desc:'',comodo:'',estado:'',fotos:[]}); renderMoveis();
-    };
+    document.getElementById('btn-add-movel').onclick = () => { moveis.push({desc:'',comodo:'',estado:'',fotos:[]}); renderMoveis(); };
     renderMoveis();
 
     // ========= SUBMIT + OVERLAY =========
-    function showLoading(show){
-      const ov = document.getElementById('loading-overlay');
-      if(ov) ov.style.display = show ? 'flex' : 'none';
-    }
+    function showLoading(show){ const ov = document.getElementById('loading-overlay'); if(ov) ov.style.display = show ? 'flex' : 'none'; }
 
     document.getElementById('form').onsubmit = async function(e){
       e.preventDefault();
@@ -474,10 +417,10 @@
       try {
         const data = {
           tipoVistoria: document.getElementById('tipo-vistoria').value,
-          nome: document.getElementById('nome').value,
-          email: document.getElementById('email').value,
+          nome: document.getElementById('nome').value,                      // Locador (nome)
+          email: document.getElementById('email').value,                    // Locador (email)
           nomeVistoriador: document.getElementById('nome-vistoriador').value,
-          emailVistoriador: document.getElementById('email-locador').value,
+          emailVistoriador: document.getElementById('email-locador').value, // Vistoriador (email)
           cidade: document.getElementById('cidade').value,
           dia: document.getElementById('dia').value,
           mes: document.getElementById('mes').value,
@@ -489,16 +432,15 @@
           moveis: moveis
         };
         await generateAndSend(data);
-        alert("PDF gerado e baixado com sucesso!");
       } catch(err){
         console.error(err);
-        alert("Erro ao gerar PDF.");
+        alert("Erro ao gerar/enviar o PDF.");
       } finally {
         showLoading(false);
       }
     };
 
-    // ========= PDF DINÂMICO =========
+    // ========= PDF + ZAPSIGN =========
     async function generateAndSend(data) {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -517,24 +459,18 @@
       }
 
       // Faixa topo
-      doc.setFillColor(...corVermelha);
-      doc.rect(0, 0, pageW, 30, 'F');
+      doc.setFillColor(...corVermelha); doc.rect(0, 0, pageW, 30, 'F');
       doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
       doc.setFontSize(22); doc.text('MSE ENGENHARIA', pageW/2, 18, {align:'center'});
       doc.setFontSize(13); doc.text('FICHA DE VISTORIA DE IMÓVEL', pageW/2, 26, {align:'center'});
 
       // Subtítulo
       doc.setFontSize(15); doc.setTextColor(...corVermelha);
-      doc.text(
-        (data.tipoVistoria && data.tipoVistoria.toUpperCase() === 'SAIDA') ? 'VISTORIA DE SAÍDA' : 'VISTORIA DE ENTRADA',
-        pageW/2, 40, {align:'center'}
-      );
+      doc.text((data.tipoVistoria && data.tipoVistoria.toUpperCase() === 'SAIDA') ? 'VISTORIA DE SAÍDA' : 'VISTORIA DE ENTRADA', pageW/2, 40, {align:'center'});
       doc.setTextColor(0,0,0);
 
       // Bloco dados (dinâmico)
-      let y = 48;
-      const boxStartY = y;
-      let linhaY = y + 8;
+      let y = 48, boxStartY = y, linhaY = y + 8;
 
       addTextMulti("Nome:", margin+3, linhaY, 12, 30, true);
       let m = addTextMulti(data.nome, margin+35, linhaY, 12, maxWidth-35);
@@ -561,38 +497,42 @@
       doc.text('Observações Gerais', margin+2, y+7);
       doc.setDrawColor(...corVermelha); doc.setLineWidth(0.4);
       doc.setFont('helvetica','normal'); doc.setTextColor(0,0,0);
-
       const obs = (data.obsGerais && data.obsGerais.trim()) ? data.obsGerais : '-';
       const obsLines = doc.splitTextToSize(obs, maxWidth-6);
       const obsHeight = Math.max(LINE, obsLines.length * LINE) + 8;
-
       doc.rect(margin, y, maxWidth, obsHeight);
       doc.text(obsLines, margin+3, y+13);
 
-      // Assinaturas (usam y final)
+      // Assinaturas + Âncoras invisíveis
       let signY = y + obsHeight + 22;
       const longLine = { x1: 40, x2: 170 };
       const shortLine = { x1: 65, x2: 145 };
 
       doc.setDrawColor(...corVermelha); doc.setLineWidth(0.7);
+      // 1) LOCATÁRIO - MSE ENGENHARIA  (âncora do Matheus)
       doc.line(longLine.x1, signY, longLine.x2, signY);
       doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(90,90,90);
       doc.text('LOCATÁRIO - MSE ENGENHARIA', pageW/2, signY+6, {align:'center'});
+      doc.setTextColor(255,255,255); doc.text('[[SIGN_MATHEUS]]', margin+2, signY - 2); doc.setTextColor(0,0,0);
 
       signY += 28;
+      // 2) VISTORIADOR
       doc.line(shortLine.x1, signY, shortLine.x2, signY);
       doc.text('VISTORIADOR', pageW/2, signY+6, {align:'center'});
+      doc.setTextColor(255,255,255); doc.text('[[SIGN_VISTORIADOR]]', margin+2, signY - 2); doc.setTextColor(0,0,0);
 
       signY += 28;
+      // 3) LOCADOR
       doc.line(shortLine.x1, signY, shortLine.x2, signY);
       doc.text('LOCADOR', pageW/2, signY+6, {align:'center'});
+      doc.setTextColor(255,255,255); doc.text('[[SIGN_LOCADOR]]', margin+2, signY - 2); doc.setTextColor(0,0,0);
 
       // Rodapé
       const cidadeDataTexto = `${data.cidade}, ${data.dia} de ${data.mes} de ${data.ano}`;
       doc.setFontSize(13); doc.setTextColor(120,0,0);
       doc.text(cidadeDataTexto, pageW - margin, pageH - 5, {align:'right'});
 
-      // ---------- FICHAS POR CÔMODO ----------
+      // --- Demais páginas (fichas, fotos, móveis) MANTIDAS ---
       for (const comodo of Object.keys(data.comodos)) {
         const info = data.comodos[comodo];
         const temDados = Object.values(info.avaliacao).some(val => val && val !== '');
@@ -606,10 +546,7 @@
           doc.setFontSize(12); doc.setTextColor(0,0,0);
 
           const table = [];
-          for (const item of Object.keys(info.avaliacao)) {
-            let val = info.avaliacao[item] || "-";
-            table.push([item, val]);
-          }
+          for (const item of Object.keys(info.avaliacao)) table.push([item, info.avaliacao[item] || "-"]);
           doc.autoTable({
             startY: 28,
             head: [['Item', 'Estado de Conservação']],
@@ -651,7 +588,6 @@
         }
       }
 
-      // ---------- MÓVEIS ----------
       if (data.moveis && data.moveis.length > 0) {
         doc.addPage();
         doc.setFontSize(15); doc.setFont('helvetica', 'bold'); doc.setTextColor(...corVermelha);
@@ -660,7 +596,7 @@
         doc.autoTable({
           startY: 28,
           head: [['Descrição', 'Cômodo', 'Estado de Conservação']],
-          body: data.moveis.filter(mov=>mov.desc||mov.comodo||mov.estado).map(mov=>[mov.desc||'-', mov.comodo||'-', mov.estado||'-']),
+          body: data.moveis.filter(m=>m.desc||m.comodo||m.estado).map(m=>[m.desc||'-', m.comodo||'-', m.estado||'-']),
           styles: { font: 'helvetica', fontSize: 12 },
           headStyles: { fillColor: corVermelha, textColor: 255, halign: 'center', fontStyle: 'bold' },
           margin: { left: margin, right: margin }
@@ -682,17 +618,49 @@
         }
       }
 
-      doc.save(`Ficha_Vistoria_${data.nome || 'imovel'}.pdf`);
+      // === Envio para o seu endpoint da Vercel ===
+      const dataUri = doc.output('datauristring');  // "data:application/pdf;base64,AAA..."
+      const signers = [
+        { name: data.nomeVistoriador || 'Vistoriador', email: data.emailVistoriador || '', auth_mode: 'assinaturaTela-tokenEmail', send_automatic_email: true, signature_placement: '[[SIGN_VISTORIADOR]]' },
+        { name: data.nome || 'Locador',               email: data.email || '',            auth_mode: 'assinaturaTela-tokenEmail', send_automatic_email: true, signature_placement: '[[SIGN_LOCADOR]]' },
+        { name: 'Matheus da Costa e Dias',            email: MATHEUS_EMAIL,               auth_mode: 'assinaturaTela-tokenEmail', send_automatic_email: true, signature_placement: '[[SIGN_MATHEUS]]' },
+      ];
+
+      let enviado = false;
+      try {
+        const resp = await fetch('/api/zapsign', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pdfDataUrl: dataUri, signers })
+        });
+        const result = await resp.json();
+        if (!resp.ok || !result?.success) throw new Error(result?.error || 'Falha no envio');
+
+        // Abre links de assinatura se vierem da API
+        const zs = result?.data?.signers || [];
+        zs.forEach(s => { if (s?.sign_url) window.open(s.sign_url, '_blank'); });
+
+        alert('Documento enviado para assinatura pela ZapSign!');
+        enviado = true;
+      } catch (err) {
+        console.error('Falha ao enviar para ZapSign:', err);
+        alert('PDF gerado. Falha ao enviar para ZapSign (veja o console).');
+      }
+
+      // (Opcional) manter o download local como backup
+      if (!enviado) {
+        doc.save(`Ficha_Vistoria_${data.nome || 'imovel'}.pdf`);
+      }
 
       async function insertImageFull(doc, dataUrl) {
         return new Promise(resolve => {
-          let img = new Image();
+          const img = new Image();
           img.onload = function() {
             const pw = pageW - margin*2, ph = pageH - 38;
-            let iw = img.width, ih = img.height;
-            let ratio = Math.min(pw/iw, ph/ih);
-            let w = iw*ratio, h = ih*ratio;
-            let x = (pageW - w)/2, y = 30 + ((ph - h)/2);
+            const iw = img.width, ih = img.height;
+            const ratio = Math.min(pw/iw, ph/ih);
+            const w = iw*ratio, h = ih*ratio;
+            const x = (pageW - w)/2, y = 30 + ((ph - h)/2);
             doc.addImage(img, 'JPEG', x, y, w, h);
             resolve();
           };
@@ -703,4 +671,3 @@
   </script>
 </body>
 </html>
-
