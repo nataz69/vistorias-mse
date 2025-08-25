@@ -166,7 +166,7 @@
 
   <script>
     /* ===== CONFIG ===== */
-    const MATHEUS_EMAIL = 'matheus@mse.com.br'; // <<< TROCAR PELO E-MAIL CORRETO
+    const MATHEUS_EMAIL = 'matheus@SEU-DOMINIO.com.br'; // <<< TROCAR PELO E-MAIL CORRETO
 
     /* ===== ITENS E CÔMODOS ===== */
     const ITENS_COMODO = {
@@ -247,24 +247,45 @@
       document.getElementById('file_geral_'+comodo.replace(/[^\w]/g,'_')).click();
     };
 
-    // Conversão/compressão universal p/ JPEG (qualidade 0.9)
-    async function fileToJpegDataURL(file, maxSide=1600, quality=0.9) {
-      const bitmap = await createImageBitmap(file).catch(() => null);
-      if (!bitmap) {
-        return new Promise((res) => {
-          const r = new FileReader();
-          r.onload = () => res(r.result);
-          r.readAsDataURL(file);
-        });
-      }
-      const { width, height } = bitmap;
+    /* ====== CONVERSÃO UNIVERSAL PARA JPEG (MOBILE OK) ====== */
+    async function fileToJpegDataURL(file, maxSide = 1600, quality = 0.9) {
+      try {
+        if ('createImageBitmap' in window) {
+          const bitmap = await createImageBitmap(file);
+          const { width, height } = bitmap;
+          const scale = Math.min(1, maxSide / Math.max(width, height));
+          const w = Math.round(width * scale);
+          const h = Math.round(height * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(bitmap, 0, 0, w, h);
+          return canvas.toDataURL('image/jpeg', quality);
+        }
+      } catch(e) { /* fallback abaixo */ }
+
+      // Fallback universal (iOS/HEIC): FileReader -> <img> -> canvas (redimensiona)
+      const dataUrl = await new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(r.result);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+      const img = await new Promise((resolve, reject) => {
+        const el = new Image();
+        el.onload = () => resolve(el);
+        el.onerror = reject;
+        el.src = dataUrl;
+      });
+      const width = img.naturalWidth || img.width;
+      const height = img.naturalHeight || img.height;
       const scale = Math.min(1, maxSide / Math.max(width, height));
       const w = Math.round(width * scale);
       const h = Math.round(height * scale);
       const canvas = document.createElement('canvas');
       canvas.width = w; canvas.height = h;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(bitmap, 0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
       return canvas.toDataURL('image/jpeg', quality);
     }
 
@@ -532,7 +553,7 @@
       doc.setFontSize(13); doc.setTextColor(120,0,0);
       doc.text(cidadeDataTexto, pageW - margin, pageH - 5, {align:'right'});
 
-      // --- Demais páginas (fichas, fotos, móveis) MANTIDAS ---
+      // --- Demais páginas (fichas, fotos, móveis) ---
       for (const comodo of Object.keys(data.comodos)) {
         const info = data.comodos[comodo];
         const temDados = Object.values(info.avaliacao).some(val => val && val !== '');
@@ -633,7 +654,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pdfDataUrl: dataUri, signers })
         });
-        const result = await resp.json();
+        let result;
+        try { result = await resp.json(); }
+        catch { result = { success:false, error: await resp.text() }; }
+
         if (!resp.ok || !result?.success) throw new Error(result?.error || 'Falha no envio');
 
         // Abre links de assinatura se vierem da API
@@ -671,4 +695,3 @@
   </script>
 </body>
 </html>
-
